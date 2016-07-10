@@ -1,6 +1,6 @@
 {
   "name": "kookaburra",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Kookaburra is a Hapi plugin that lets you use generator function coroutines as handlers using Bluebird",
   "repository": "xargi/kookaburra",
   "main": "index.js",
