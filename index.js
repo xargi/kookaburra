@@ -82,7 +82,6 @@ function patchRoutes(server) {
 }
 
 function register(server, _options, next) {
-  console.dir(_options);
   Object.assign(pluginOptions, _options);
   if (pluginOptions.patchAll !== false) {
     // Hook to patch routes before server starts listening
