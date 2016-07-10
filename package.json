@@ -1,0 +1,27 @@
+{
+  "name": "kookaburra",
+  "version": "1.0.0",
+  "description": "Kookaburra is a Hapi plugin that lets you use generator function coroutines as handlers using Bluebird",
+  "repository": "xargi/kookaburra",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mikael Viitaniemi <mikael.viitaniemi@zc.fi> http://github.com/xargi",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint-plugin-import": "^1.10.2",
+    "hapi": "^13.5.0",
+    "eslint": "^3.0.1",
+    "eslint-config-airbnb-base": "^4.0.0"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.1"
+  },
+  "peerDependencies": {
+    "hapi": "13.x"
+  },
+  "engines": {
+    "node": ">=4.0"
+  }
+}
