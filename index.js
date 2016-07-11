@@ -12,13 +12,21 @@ function patchHandler(handler) {
   return function patchedGeneratorHandler(request, reply) {
     Bluebird.coroutine(handler.bind(this))(request, reply)
       .then((handlerResult) => {
+        // If the handlerResult is undefined, it's probably because the value was already
+        // provided in the handler and we just returned by default.
+        if (handlerResult === undefined && pluginOptions.skipUndefined) {
+          request.log(['handler'],
+            `Undefined return value ignored in generator handler ${handler.name}`);
+          return;
+        }
+        
         // If the success result of the handler is an error either:
         // 1. An error was returned.
         // 2. An error was replied, using the pattern reply(Error)
         // In case 1, we'd probably want to reply the error, but in case 2 it would cause
         // calling reply twice which is an error in Hapi and errors should be thrown anyway.
         // For this reason, if it is an error, we just ignore it.
-        if (handlerResult.isBoom && pluginOptions.skipReturnError) {
+        if (handlerResult !== undefined && handlerResult.isBoom && pluginOptions.skipReturnError) {
           request.log(['handler'], `Unthrown error ignored in generator handler ${handler.name}`);
           return;
         }
@@ -27,18 +35,11 @@ function patchHandler(handler) {
         // the handlerResult value will be a response object. A response object has, among others,
         // the properties statusCode, headers, and source. Having all of these present
         // is probably enough to determine that reply was already called and we should do nothing.
-        if (handlerResult.statusCode !== undefined &&
+        if (handlerResult !== undefined &&
+            handlerResult.statusCode !== undefined &&
             handlerResult.headers !== undefined &&
             handlerResult.source !== undefined &&
             pluginOptions.skipReturnReply) {
-          return;
-        }
-
-        // If the handlerResult is undefined, it's probably because the value was already
-        // provided in the handler and we just returned by default.
-        if (handlerResult === undefined && pluginOptions.skipUndefined) {
-          request.log(['handler'],
-            `Undefined return value ignored in generator handler ${handler.name}`);
           return;
         }
 
