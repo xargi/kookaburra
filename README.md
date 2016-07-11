@@ -32,7 +32,7 @@ server.register({
 ## Options
 
 - patchAll:
-    - Automatically patch all detected generator handlers in route tables. If disabled, you must use the ```handler: { coroutine: *fn() {...} }``` syntax. Default value: ```true```.
+    - Automatically patch all detected generator handlers in route tables. If disabled, you must use the ```handler: { coroutine: *fn() {...} }``` syntax to define a handler. Default value: ```true```.
 - skipReturnReply:
     - Skip replying when a ```return reply();``` return value is detected. If disabled, you shouldn't use that syntax, but it may allow avoiding a falsely detected reply call. Default value: ```true```.
 - skipUndefined:
