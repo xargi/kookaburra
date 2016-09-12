@@ -19,7 +19,7 @@
     "bluebird": "^3.4.1"
   },
   "peerDependencies": {
-    "hapi": "13.x"
+    "hapi": "14.x"
   },
   "engines": {
     "node": ">=4.0"
