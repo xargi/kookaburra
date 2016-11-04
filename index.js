@@ -105,4 +105,4 @@ function register(server, _options, next) {
 }
 
 register.attributes = { pkg: Package };
-module.exports = { register };
+module.exports = { register, patchHandler };
